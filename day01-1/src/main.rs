@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
@@ -43,12 +43,11 @@ get if you multiply them together?
 
  */
 fn main() {
-    let mut read: HashMap<u32, u32> = HashMap::new();
+    let mut read: HashSet<u32> = HashSet::new();
 
     if let Ok(lines) = read_lines("./resources/input") {
         for line in lines {
             if let Ok(amount_as_string) = line {
-
                 let value: u32 = match amount_as_string.trim().parse() {
                     Ok(num) => num,
                     Err(_) => continue,
@@ -58,7 +57,7 @@ fn main() {
                     println!("{}", value * (2020 - value));
                     break;
                 } else {
-                    read.insert(value, value);
+                    read.insert(value);
                 }
             }
         }
